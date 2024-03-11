@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+        integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+       
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        /* body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+        } */
+
+        .container {
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+         
+            
+            z-index: -1;
+            overflow: hidden;
+            /* background-color: black; */
+
+
+        }
+        .box{
+            height: 60%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 300px;
+            
+            background-color: rgb(27, 190, 236);
+            border-radius: 5%;
+            overflow: hidden;
+            z-index: 0;
+        }
+        .info{
+             margin-bottom: 20%;
+            width: 100%;
+            background-color:  rgb(27, 190, 236);
+            font-size: 1.2rem;
+            line-height: 3rem;
+            z-index:2;
+            overflow: hidden;
+        }
+        /* .wave{
+            background-color: rgb(124, 219, 234);
+            height: 50vh;
+            width: 50vh;
+            margin-top:20%;
+            position: absolute;
+            z-index: 1;
+            overflow: hidden;
+            animation: rotate 20s linear infinite;
+
+        } */
+       
+        
+        #search{
+            padding: 0;
+            margin: 0;
+            height: 50px;
+            width: 300px;
+            font-size: 1rem;
+            
+            background-color: brown;
+        }
+        .weathericon .fa-sun {
+            /* border: 2px solid green; */
+            font-size: 100px;
+            margin-left: 26%;
+          margin-bottom: 15%;
+            animation: rotate 20s linear infinite;
+        }
+        @keyframes rotate {
+    0% {
+        transform: rotate(0deg);
+    }
+    100%{
+        transform: rotate(360deg);
+    }
+}
+    </style>
+    <title>Weather App</title>
+</head>
+
+<body>
+<input type="text" id="search" name="search">
+    <div class="container">
+        
+        <div class="wave one"></div>
+        <!-- <div class="wave two"></div> -->
+     
+    <div class="box">
+      
+
+        <div class="weathericon">
+            <i class="fa-solid fa-sun" style="color: yellow;"></i>
+     
+
+        <div class="info">
+            <h2 class="location"><i class="fa-solid fa-street-view"></i>{%Location%},{%Country%}</h2>
+            <p id="date">SUN | MAR 9 | 2024</p>
+            <h1 class="temp">{%tempvalue%}&deg;C</h1>
+            <p class="min_max">MIN {%tempmin%}&deg;C || MAX {%tempmax%}&deg;C</p>
+           <!-- <label for="search"> <input type="text" placeholder="City Name" id="search" name="search"></label> -->
+      
+    </div>
+</div>
+</div>
+</div>
+
+
+
+    <script>
+        const show = document.getElementById("date");
+        const currentDay = () => {
+            let time = new Date();
+            const day = time.getDay();
+
+            let weekdays = new Array();
+            weekdays[0] = "Sun";
+            weekdays[1] = "Mon";
+            weekdays[2] = "Tue";
+            weekdays[3] = "Wed";
+            weekdays[4] = "Thur";
+            weekdays[5] = "Fri";
+            weekdays[6] = "Sat";
+            let weekday = weekdays[day];
+            return weekday;
+        }
+        const currentDate = () => {
+            let currentMonth = new Date();
+            let date = currentMonth.getDate();
+            let month = new Array();
+            month[0] = "Jan";
+            month[1] = "Feb";
+            month[2] = "Mar";
+            month[3] = "Apr";
+            month[4] = "May";
+            month[5] = "Jun";
+            month[6] = "Jul";
+            month[7] = "Aug";
+            month[8] = "Sept";
+            month[9] = "Oct";
+            month[10] = "Nov";
+            month[11] = "Dec";
+
+            let showDate = month[currentMonth.getMonth()] + " " + date;
+            return showDate;
+
+        }
+
+        const currentTime = () => {
+            let time = new Date();
+            let hour = time.getHours();
+            let min = time.getMinutes();
+
+            let period = "AM";
+            if (hour > 12) {
+                period = "PM";
+                hour -= 12;
+            }
+            if (min < 10) {
+                min = "0" + min;
+            }
+
+            let showTime = hour + ":" + min + period;
+            return showTime;
+        }
+
+        show.innerHTML = currentDay() + " | " + currentDate() + " | " + currentTime()
+    </script>
+</body>
+
+</html>
